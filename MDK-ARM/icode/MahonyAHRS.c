@@ -17,6 +17,7 @@
 // Definitions
 //这里都是可以调整的参数
 //---------------------------------------***********************************
+float twoKp;        // <--- 新增这行：定义 Kp 变量
 float twoKi;		// 2 * integral gain (Ki)
 float q0, q1, q2, q3;	// quaternion of sensor frame relative to auxiliary frame
 float integralFBx, integralFBy, integralFBz;  // integral error terms scaled by Ki
@@ -36,11 +37,12 @@ static float invSqrt(float x) {
 }
 
 
-#define twoKpDef	(2.0f * 100.0f)	// 2 * proportional gain
-#define twoKiDef	(2.0f * 0.005f)	// 2 * integral gain
+#define twoKpDef	(2.0f * 0.50f)	// 2 * proportional gain	这个不用了
+#define twoKiDef	(2.0f * 0.0f)	// 2 * integral gain
 void Mahony_Init(float sampleFrequency)
 {
-	twoKi = twoKiDef;	// 2 * integral gain (Ki)
+	twoKp = 2.0f * 0.5f; // 给个默认值
+	//twoKi = twoKiDef;	// 2 * integral gain (Ki) （原）
 	q0 = 1.0f;
 	q1 = 0.0f;
 	q2 = 0.0f;
@@ -52,7 +54,10 @@ void Mahony_Init(float sampleFrequency)
 	invSampleFreq = 1.0f / sampleFrequency;
 }
 
-
+void Mahony_SetKp(float kp)
+{
+    twoKp = kp;
+}
 
 float Mahony_invSqrt(float x)
 {
@@ -208,9 +213,9 @@ void Mahony_update(float gx, float gy, float gz, float ax, float ay, float az, f
 		}
 
 		// Apply proportional feedback
-		gx += twoKpDef * halfex;
-		gy += twoKpDef * halfey;
-		gz += twoKpDef * halfez;
+		gx += twoKp * halfex;
+		gy += twoKp * halfey;
+		gz += twoKp * halfez;
 	}
 
 	// Integrate rate of change of quaternion
@@ -277,9 +282,9 @@ void MahonyAHRSupdateIMU(float gx, float gy, float gz, float ax, float ay, float
         }
 
         // Apply proportional feedback
-        gx += twoKpDef * halfex;
-        gy += twoKpDef * halfey;
-        gz += twoKpDef * halfez;
+		gx += twoKp * halfex;
+		gy += twoKp * halfey;
+		gz += twoKp * halfez;
     }
 
     // Integrate rate of change of quaternion

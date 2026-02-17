@@ -1,7 +1,7 @@
 Dependencies for Project 'ICM42688+MMC5603 9 axis gyroscope', Target 'ICM42688+MMC5603 9 axis gyroscope': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::ARMCC
 F (startup_stm32f103xb.s)(0x6991DD1E)(--cpu Cortex-M3 -g --apcs=interwork -I.\RTE\_ICM42688_MMC5603_9_axis_gyroscope-IE:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IE:\Keil5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include--pd "__UVISION_VERSION SETA 539" --pd "_RTE_ SETA 1" --pd "STM32F10X_MD SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32f103xb.lst --xref -o temp_control\startup_stm32f103xb.o --depend temp_control\startup_stm32f103xb.d)
-F (../Core/Src/main.c)(0x69947633)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ./icode --no-multibyte-chars-I.\RTE\_ICM42688_MMC5603_9_axis_gyroscope-IE:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IE:\Keil5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o temp_control\main.o --omf_browse temp_control\main.crf --depend temp_control\main.d)
+F (../Core/Src/main.c)(0x6994805D)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ./icode --no-multibyte-chars-I.\RTE\_ICM42688_MMC5603_9_axis_gyroscope-IE:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IE:\Keil5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o temp_control\main.o --omf_browse temp_control\main.crf --depend temp_control\main.d)
 I (../Core/Inc/main.h)(0x6991DD1D)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x682099AA)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x69902F6D)
@@ -42,7 +42,7 @@ I (./icode/OLED.h)(0x6714E2A7)
 I (./icode/OLED_Data.h)(0x6714E987)
 I (./icode/delay.h)(0x68569949)
 I (./icode/Serial.h)(0x694525FF)
-I (./icode/MahonyAHRS.h)(0x66D07CF8)
+I (./icode/MahonyAHRS.h)(0x69947FDB)
 I (./icode/icm42688_driver.h)(0x698ECD7C)
 I (E:\Keil5\ARM\ARMCC\include\math.h)(0x60252378)
 I (./icode/key.h)(0x698F7ACF)
@@ -888,7 +888,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x682099AA)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x682099AA)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x682099AA)
 F (.\icode\delay.h)(0x68569949)()
-F (.\icode\icm42688_driver.c)(0x6991E5EB)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ./icode --no-multibyte-chars-I.\RTE\_ICM42688_MMC5603_9_axis_gyroscope-IE:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IE:\Keil5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o temp_control\icm42688_driver.o --omf_browse temp_control\icm42688_driver.crf --depend temp_control\icm42688_driver.d)
+F (.\icode\icm42688_driver.c)(0x69947853)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ./icode --no-multibyte-chars-I.\RTE\_ICM42688_MMC5603_9_axis_gyroscope-IE:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IE:\Keil5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o temp_control\icm42688_driver.o --omf_browse temp_control\icm42688_driver.crf --depend temp_control\icm42688_driver.d)
 I (icode\icm42688_driver.h)(0x698ECD7C)
 I (../Core/Inc/main.h)(0x6991DD1D)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x682099AA)
@@ -958,10 +958,10 @@ I (E:\Keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (E:\Keil5\ARM\ARMCC\include\stdarg.h)(0x60252376)
 I (E:\Keil5\ARM\ARMCC\include\string.h)(0x6025237E)
 F (.\icode\Serial.h)(0x694525FF)()
-F (.\icode\MahonyAHRS.c)(0x6990CEF4)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ./icode --no-multibyte-chars-I.\RTE\_ICM42688_MMC5603_9_axis_gyroscope-IE:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IE:\Keil5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o temp_control\mahonyahrs.o --omf_browse temp_control\mahonyahrs.crf --depend temp_control\mahonyahrs.d)
-I (icode\MahonyAHRS.h)(0x66D07CF8)
+F (.\icode\MahonyAHRS.c)(0x69947FDB)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ./icode --no-multibyte-chars-I.\RTE\_ICM42688_MMC5603_9_axis_gyroscope-IE:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IE:\Keil5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o temp_control\mahonyahrs.o --omf_browse temp_control\mahonyahrs.crf --depend temp_control\mahonyahrs.d)
+I (icode\MahonyAHRS.h)(0x69947FDB)
 I (E:\Keil5\ARM\ARMCC\include\math.h)(0x60252378)
-F (.\icode\MahonyAHRS.h)(0x66D07CF8)()
+F (.\icode\MahonyAHRS.h)(0x69947FDB)()
 F (.\icode\key.c)(0x6991DDAF)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ./icode --no-multibyte-chars-I.\RTE\_ICM42688_MMC5603_9_axis_gyroscope-IE:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IE:\Keil5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o temp_control\key.o --omf_browse temp_control\key.crf --depend temp_control\key.d)
 I (icode\key.h)(0x698F7ACF)
 I (../Core/Inc/main.h)(0x6991DD1D)

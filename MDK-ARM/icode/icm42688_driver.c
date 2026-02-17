@@ -26,9 +26,9 @@ static const float ACC_SENSITIVITY = 16.0f / 32768.0f;
 // Gyro: 2000dps / 32768
 static const float GYRO_SENSITIVITY = 2000.0f / 32768.0f;
 
-float acc_offset_x = 0.02f; // 填入你平放时读到的 AccX
+float acc_offset_x = 0.00f; // 填入你平放时读到的 AccX
 float acc_offset_y = 0.00f; // 填入你平放时读到的 AccY
-float acc_offset_z = 0.01f; // 填入 (平放时读到的 AccZ - 1.0f)
+float acc_offset_z = 0.00f; // 填入 (平放时读到的 AccZ - 1.0f)
 
 // =================================================================================
 // 静态底层函数声明

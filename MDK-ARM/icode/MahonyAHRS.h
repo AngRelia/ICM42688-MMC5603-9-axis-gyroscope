@@ -23,6 +23,7 @@ float getYaw(void);
 float getRollRadians(void);
 float getPitchRadians(void);
 float getYawRadians(void);
+void Mahony_SetKp(float kp);
 
 extern float roll_mahony, pitch_mahony, yaw_mahony;
 #endif

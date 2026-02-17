@@ -4,7 +4,7 @@
   * @file           : main.c
   * @brief          : Main program body
   ******************************************************************************
-  * @attention
+  * @attention v1.2 区分了6/9轴模式的显示和Kp设置.
   *
   * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
@@ -148,6 +148,11 @@ int main(void)
   
   // 从Flash加载校准数据和磁力计开启的状态
   Flash_Load_Settings(&mmc5603_data.offset_x, &mmc5603_data.offset_y, &mmc5603_data.offset_z, &mag_enabled);
+  if(mag_enabled) {
+		Mahony_SetKp(2.0f * 50.0f); // 9轴模式：使用强修正
+	} else {
+		Mahony_SetKp(2.0f * 0.50f); // 6轴模式：使用弱修正（防晃动干扰）
+	}
 	if (mag_status == 0) {
 	  // 显示状态
 	  if(mag_enabled) OLED_ShowString(0, 20, "Mag: ON ", OLED_6X8);
@@ -191,16 +196,24 @@ int main(void)
     {
         mag_enabled = !mag_enabled; // 翻转状态
 		if (mag_enabled == 0) 
-        {
-            // 刚切到 6轴模式：把当前的绝对 Yaw 值记录为偏置
-            // 这样：显示值 = 当前值 - 偏置 = 0
-            yaw_offset = yaw_mahony; 
-        }
-        else 
-        {
-            // 刚切回 9轴模式：偏置清零，恢复绝对航向
-            yaw_offset = 0.0f; 
-        }
+		{
+			Mahony_SetKp(2.0f * 0.50f); 	//六轴给Kp 0.5
+		}
+		else 
+		{
+			Mahony_SetKp(2.0f * 100.0f); 	//九轴给Kp 100
+		}
+		// if (mag_enabled == 0) 
+    //     {
+    //         // 刚切到 6轴模式：把当前的绝对 Yaw 值记录为偏置
+    //         // 这样：显示值 = 当前值 - 偏置 = 0
+    //         yaw_offset = yaw_mahony; 
+    //     }
+    //     else 
+    //     {
+    //         // 刚切回 9轴模式：偏置清零，恢复绝对航向
+    //         yaw_offset = 0.0f; 
+    //     }
 
         // 保存状态到 Flash (需要同时保存当前的偏移量，否则会覆盖成0)
         Flash_Save_Settings(mmc5603_data.offset_x, mmc5603_data.offset_y, mmc5603_data.offset_z, mag_enabled);
@@ -277,11 +290,11 @@ int main(void)
         Mahony_computeAngles();
         display_count++;
     }
-    yaw_display = yaw_mahony - yaw_offset;
+    //yaw_display = yaw_mahony - yaw_offset;
 	
-	// 处理角度回绕问题 (确保在 -180 到 +180 之间)
-    if (yaw_display > 180.0f)  yaw_display -= 360.0f;
-    if (yaw_display < -180.0f) yaw_display += 360.0f;
+	// // 处理角度回绕问题 (确保在 -180 到 +180 之间)
+  //   if (yaw_display > 180.0f)  yaw_display -= 360.0f;
+  //   if (yaw_display < -180.0f) yaw_display += 360.0f;
 	
     // 刷新显示和串口发送 (约 10Hz)
     if (display_count >= 10) 
@@ -304,7 +317,7 @@ int main(void)
             OLED_ShowFloatNum(40, 32, pitch_mahony, 3, 2, OLED_6X8);
             
             OLED_ShowString(0, 48, "Yaw:", OLED_6X8);
-            OLED_ShowFloatNum(40, 48, yaw_display, 3, 2, OLED_6X8);
+            OLED_ShowFloatNum(40, 48, yaw_mahony, 3, 2, OLED_6X8);
         }
         else if (page_index == 1)
         {
@@ -386,7 +399,7 @@ int main(void)
         Serial2_Printf("roll:%.2f,pitch:%.2f,yaw:%.2f\r\n", 
             roll_mahony, 
             pitch_mahony, 
-            yaw_display
+            yaw_mahony
         );
     }
     /* USER CODE END WHILE */
