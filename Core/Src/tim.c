@@ -42,9 +42,20 @@ void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
+  /* TIM2 提供 200Hz 的融合节拍 (5ms), 必须与下面【四处】保持一致:
+   *   - main.c 的 Mahony_Init(200.0f)
+   *   - ICM-42688 的 GYRO/ACCEL ODR = 200Hz
+   *   - 本工程 .ioc 里的 TIM2.Period（2026-10-14 修正：原来写的是 999 = 100Hz，
+   *     与代码不一致。若用 CubeMX 重新生成，TIM2 会从 200Hz 掉到 100Hz ——
+   *     后果：融合采样率与 invSampleFreq 失配、传感器 200Hz 数据被抽点、
+   *     节点B 的 100Hz 发帧（TIM2 二分频）掉成 50Hz，ML 输入直接错。）
+   * 计算: 定时器时钟 = 72MHz (APB1=36MHz, 因 APB1 分频!=1 故 x2)
+   *       计数时钟 = 72MHz / (719+1) = 100kHz  -> 1 个计数 = 10us
+   *       中断周期 = (499+1) * 10us = 5ms  -> 200Hz
+   * 注意: 改这里就要同步改 Mahony_Init 的频率、传感器 ODR 与 .ioc 的 TIM2.Period。 */
   htim2.Init.Prescaler = 719;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 999;
+  htim2.Init.Period = 499;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
@@ -120,7 +131,9 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* tim_baseHandle)
     __HAL_RCC_TIM2_CLK_ENABLE();
 
     /* TIM2 interrupt Init */
-    HAL_NVIC_SetPriority(TIM2_IRQn, 0, 0);
+    /* TIM2 承担 1kHz 融合节拍。优先级由 0 降到 1(低于 SysTick/Cortex 系统异常),
+       这样即使中断里耗时偏长, HAL_GetTick / HAL_Delay 的超时判断也不会失效。 */
+    HAL_NVIC_SetPriority(TIM2_IRQn, 1, 0);
     HAL_NVIC_EnableIRQ(TIM2_IRQn);
   /* USER CODE BEGIN TIM2_MspInit 1 */
 
